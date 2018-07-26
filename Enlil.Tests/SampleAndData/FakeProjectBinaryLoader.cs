@@ -1,4 +1,5 @@
 using System.Reflection;
+using Enlil.Domain;
 
 namespace Enlil.Tests
 {

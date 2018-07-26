@@ -1,3 +1,5 @@
+using Enlil.Domain;
+
 namespace Enlil.Tests
 {
     public class FakeProjectFileChooser : IProjectFileChooser

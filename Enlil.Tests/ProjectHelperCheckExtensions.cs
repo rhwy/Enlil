@@ -1,4 +1,5 @@
 using Enlil;
+using Enlil.Domain;
 using NFluent;
 using NFluent.Extensibility;
 
