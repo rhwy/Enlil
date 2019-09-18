@@ -20,11 +20,26 @@ namespace Enlil.Tests
             var resultContext = await projectHelper.BuildProjectAssembly();
 
             var asm = resultContext.ResultingAssembly;
-            var type = asm.GetType("Sample.Greetings");
+            var type = asm.GetType("Enlil.Sample.Greetings");
             var greetings = Activator.CreateInstance(type);
-            var toHtml = type.GetMethod("ToHtml");
-            var result = toHtml.Invoke(greetings, new [] { "# Hello!"});
-            Check.That(result).IsEqualTo($"<h1>Hello!</h1>{Environment.NewLine}");
+            var sayHello = type.GetMethod("SayHello");
+            var result = sayHello?.Invoke(greetings, new object[] { "Rui"});
+            Check.That(result).IsEqualTo($"Hello Rui");
+
+        }
+        
+        [Fact]
+        public async Task get_access_to_resulting_assembly_on_a_project_folder_with_dependency()
+        {
+            var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
+            var resultContext = await projectHelper.BuildProjectAssembly();
+
+            var asm = resultContext.ResultingAssembly;
+            var type = asm.GetType("Enlil.Sample.Greetings");
+            var greetings = Activator.CreateInstance(type);
+            var sayHello = type.GetMethod("SayHelloMdToHtml");
+            var result = sayHello?.Invoke(greetings, new object[] { "Rui"});
+            Check.That(result).IsEqualTo($"<h1>Hello <strong>Rui</strong></h1>");
 
         }
     }

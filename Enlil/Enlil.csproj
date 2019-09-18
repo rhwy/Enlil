@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <Version>0.3.0</Version>
     <PackageId>Enlil</PackageId>
     <Authors>Rui Carvalho</Authors>
@@ -12,6 +11,8 @@
     <RepositoryUrl>https://github.com/rhwy/Enlil</RepositoryUrl>
     <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.0</TargetFrameworks>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />

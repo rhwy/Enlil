@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enlil", "Enlil\Enlil.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enlil.Tests", "Enlil.Tests\Enlil.Tests.csproj", "{8EB49728-0548-4227-973B-83895826047A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enlil.Sample", "Enlil.Sample\Enlil.Sample.csproj", "{30653EEA-9FC1-439A-ADE7-26A24337EF30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enlil.Runner", "Enlil.Runner\Enlil.Runner.csproj", "{3BD4AF25-49DD-4D0A-B501-42E1195696B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{8EB49728-0548-4227-973B-83895826047A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EB49728-0548-4227-973B-83895826047A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EB49728-0548-4227-973B-83895826047A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30653EEA-9FC1-439A-ADE7-26A24337EF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30653EEA-9FC1-439A-ADE7-26A24337EF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30653EEA-9FC1-439A-ADE7-26A24337EF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30653EEA-9FC1-439A-ADE7-26A24337EF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD4AF25-49DD-4D0A-B501-42E1195696B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD4AF25-49DD-4D0A-B501-42E1195696B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD4AF25-49DD-4D0A-B501-42E1195696B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD4AF25-49DD-4D0A-B501-42E1195696B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

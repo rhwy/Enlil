@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Enlil.Tests.SampleAndData;
 using NFluent;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Enlil.Tests
 {
@@ -11,6 +12,12 @@ namespace Enlil.Tests
     {
         public class with_projectBuilder
         {
+            private readonly ITestOutputHelper _outputHelper;
+
+            public with_projectBuilder(ITestOutputHelper outputHelper)
+            {
+                _outputHelper = outputHelper;
+            }
             [Fact]
             public async Task
                 ensure_projectBuilder_is_called()
@@ -34,10 +41,11 @@ namespace Enlil.Tests
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
                 var resultContext = await projectHelper.BuildProjectAssembly();
 
+                var currentTarget = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
                 var expectedBuildFile =
-                    Path.Combine(SampleProjectHelper.WorkFolder(), "bin/Debug/netstandard2.0/Sample.dll");
+                    Path.Combine(SampleProjectHelper.WorkFolder(), "bin/Debug",currentTarget,$"{SampleProjectHelper.SampleProjectName}.dll");
                 var expectedBinFolder =
-                    Path.Combine(SampleProjectHelper.WorkFolder(), "bin/Debug/netstandard2.0");
+                    Path.Combine(SampleProjectHelper.WorkFolder(), "bin/Debug",currentTarget);
 
                 Check.That(resultContext.ResultingAssemblyFile).IsEqualTo(expectedBuildFile);
                 Check.That(resultContext.BinFolder).IsEqualTo(expectedBinFolder);

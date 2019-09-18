@@ -49,8 +49,8 @@ namespace Enlil.Tests
 
                 Check.That(resultContext).HasNoErrors();
                 Check.That(resultContext.ProjectFile)
-                    .IsEqualTo(Path.Combine(SampleProjectHelper.WorkFolder(), "Sample.csproj"));
-                Check.That(resultContext.ProjectName).IsEqualTo("Sample");
+                    .IsEqualTo(Path.Combine(SampleProjectHelper.WorkFolder(), $"{SampleProjectHelper.SampleProjectName}.csproj"));
+                Check.That(resultContext.ProjectName).IsEqualTo(SampleProjectHelper.SampleProjectName);
             }
         }
     }

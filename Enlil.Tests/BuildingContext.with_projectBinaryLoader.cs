@@ -46,12 +46,12 @@ namespace Enlil.Tests
                 Check.That(resultContext).HasNoErrors();
 
                 var asm = resultContext.ResultingAssembly;
-                var type = asm.GetType("Sample.Greetings");
+                var type = asm.GetType(SampleProjectHelper.SampleNameSpaceAndClass);
 
                 Check.That(type).IsNotNull();
 
                 var greetings = Activator.CreateInstance(type);
-                var sayHello = type.GetMethod("SayHello");
+                var sayHello = type.GetMethod("SayHello", new Type[]{});
                 var result = sayHello.Invoke(greetings, null);
                 Check.That(result).IsEqualTo("Hello World");
 
@@ -64,11 +64,11 @@ namespace Enlil.Tests
                 var resultContext = await projectHelper.BuildProjectAssembly();
 
                 var asm = resultContext.ResultingAssembly;
-                var type = asm.GetType("Sample.Greetings");
+                var type = asm.GetType(SampleProjectHelper.SampleNameSpaceAndClass);
                 var greetings = Activator.CreateInstance(type);
-                var toHtml = type.GetMethod("ToHtml");
-                var result = toHtml.Invoke(greetings, new[] {"# Hello!"});
-                Check.That(result).IsEqualTo($"<h1>Hello!</h1>{Environment.NewLine}");
+                var toHtml = type.GetMethod("SayHello", new Type[]{typeof(string)});
+                var result = toHtml?.Invoke(greetings, new[] {"Rui"});
+                Check.That(result).IsEqualTo($"<h1>Hello <strong>Rui</strong></h1>");
 
             }
         }
