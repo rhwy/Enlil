@@ -20,7 +20,7 @@ namespace Enlil
 
         public string WorkingDirectory => startContext.WorkingDirectory;
 
-        public Task<BuildContext> BuildProjectAssembly()
+        public BuildContext BuildProjectAssembly()
         {
             var services = setupServices();
             var context = startContext;
@@ -37,7 +37,7 @@ namespace Enlil
             return services;
         }
 
-        private Task<BuildContext> buildAndGetAssembly(BuildServices services, BuildContext context)
+        private BuildContext buildAndGetAssembly(BuildServices services, BuildContext context)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Enlil
                 context.Error = e;
             }
 
-            return Task.FromResult(context);
+            return context;
         }
     }
 }

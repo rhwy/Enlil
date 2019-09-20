@@ -29,7 +29,7 @@ namespace Enlil.Tests
             }
 
             [Fact]
-            public async Task ensure_projectFileChooser_is_called_in_build()
+            public void ensure_projectFileChooser_is_called_in_build()
             {
 
                 Action<ConventionsSetter> setconventions = overload =>
@@ -37,16 +37,16 @@ namespace Enlil.Tests
                     overload.SetProjectFileChooser(new FakeProjectFileChooser());
                 };
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder(), setconventions);
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext.ProjectFile).IsEqualTo("/path/to/csproj");
             }
 
             [Fact]
-            public async Task ensure_default_projectFileChooser_take_the_right_File()
+            public void ensure_default_projectFileChooser_take_the_right_File()
             {
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext).HasNoErrors();
                 Check.That(resultContext.ProjectFile)

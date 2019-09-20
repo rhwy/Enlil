@@ -19,7 +19,7 @@ namespace Enlil.Tests
                 _outputHelper = outputHelper;
             }
             [Fact]
-            public async Task
+            public void
                 ensure_projectBuilder_is_called()
             {
                 Action<ConventionsSetter> setconventions = overload =>
@@ -27,7 +27,7 @@ namespace Enlil.Tests
                     overload.SetProjectBuilder(new FakeProjectBuilder());
                 };
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder(), setconventions);
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext.ResultingAssemblyFile).IsEqualTo("/path/to/resulting/dll");
                 Check.That(resultContext.BinFolder).IsEqualTo("/path/to/resulting/dll/bin/folder");
@@ -35,11 +35,11 @@ namespace Enlil.Tests
             }
 
             [Fact]
-            public async Task
+            public void
                 ensure_default_project_builder_builds_the_project_when_it_exists()
             {
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 var currentTarget = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
                 var expectedBuildFile =

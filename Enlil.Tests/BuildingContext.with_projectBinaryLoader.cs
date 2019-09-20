@@ -11,7 +11,7 @@ namespace Enlil.Tests
         public class with_projectBinaryLoader
         {
             [Fact]
-            public async Task
+            public void
                 ensure_projectBinaryLoader_is_called()
             {
                 Action<ConventionsSetter> setconventions = overload =>
@@ -20,17 +20,17 @@ namespace Enlil.Tests
                     overload.SetProjectBinaryLoader(new FakeProjectBinaryLoader());
                 };
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder(), setconventions);
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext).HasNoErrors();
                 Check.That(resultContext.AssemblyLength).IsEqualTo(1000);
             }
 
             [Fact]
-            public async Task ensure_default_projectBinaryLoader_loads_assembly()
+            public void ensure_default_projectBinaryLoader_loads_assembly()
             {
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext).HasNoErrors();
                 Check.That(resultContext.AssemblyLength).IsStrictlyGreaterThan(1000);
@@ -38,10 +38,10 @@ namespace Enlil.Tests
             }
 
             [Fact]
-            public async Task ensure_default_projectBinaryLoader_loads_assembly_and_get_types()
+            public void ensure_default_projectBinaryLoader_loads_assembly_and_get_types()
             {
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 Check.That(resultContext).HasNoErrors();
 
@@ -52,22 +52,22 @@ namespace Enlil.Tests
 
                 var greetings = Activator.CreateInstance(type);
                 var sayHello = type.GetMethod("SayHello", new Type[]{});
-                var result = sayHello.Invoke(greetings, null);
+                var result = sayHello?.Invoke(greetings, null);
                 Check.That(result).IsEqualTo("Hello World");
 
             }
 
             [Fact]
-            public async Task ensure_default_projectBinaryLoader_loads_assembly_and_get_types_with_dependencies()
+            public void ensure_default_projectBinaryLoader_loads_assembly_and_get_types_with_dependencies()
             {
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                var resultContext = await projectHelper.BuildProjectAssembly();
+                var resultContext = projectHelper.BuildProjectAssembly();
 
                 var asm = resultContext.ResultingAssembly;
                 var type = asm.GetType(SampleProjectHelper.SampleNameSpaceAndClass);
                 var greetings = Activator.CreateInstance(type);
                 var toHtml = type.GetMethod("SayHello", new Type[]{typeof(string)});
-                var result = toHtml?.Invoke(greetings, new[] {"Rui"});
+                var result = toHtml?.Invoke(greetings, new object[] {"Rui"});
                 Check.That(result).IsEqualTo($"<h1>Hello <strong>Rui</strong></h1>");
 
             }
