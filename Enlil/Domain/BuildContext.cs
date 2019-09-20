@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Enlil.Domain
 {
@@ -16,5 +17,19 @@ namespace Enlil.Domain
         public string ProjectName { get; set; }
         public DateTime LastBuildTime { get; set; }
         public long AssemblyLength { get; set; }
+        public static BuildContext Default = new BuildContext();
+        
+        public static BuildContext operator > (BuildContext startContext, string workingFolder)
+        {
+            var projectHelper = new ProjectHelper(workingFolder);
+            var buildContext = projectHelper.BuildProjectAssembly();
+            return  buildContext;
+        }
+        public static BuildContext operator < (BuildContext startContext, string workingFolder)
+        {
+            var projectHelper = new ProjectHelper(workingFolder);
+            var buildContext = projectHelper.BuildProjectAssembly();
+            return buildContext;
+        }
     }
 }
