@@ -11,13 +11,22 @@ namespace Enlil.Sample
         }
     }
 
+    [Experiment]
     public class Greetings
     {
         public string SayHello() => "Hello World";
+        [Experiment(Name = "one")]
         public string SayHello(string name)
         {
             return new Markdown().Transform($"# Hello **{name}**");
         }
+    }
+    
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
+    public class ExperimentAttribute : Attribute
+    {
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }
 

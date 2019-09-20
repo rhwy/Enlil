@@ -1,7 +1,9 @@
+using System;
 using Enlil;
 using Enlil.Domain;
 using NFluent;
 using NFluent.Extensibility;
+using Xunit;
 
 namespace Enlil.Tests
 {
@@ -17,5 +19,12 @@ namespace Enlil.Tests
                 .EndCheck();
             return ExtensibilityHelper.BuildCheckLink(check);
         }
+    }
+
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
+    public class ExperimentAttribute : Attribute
+    {
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
     }
 }

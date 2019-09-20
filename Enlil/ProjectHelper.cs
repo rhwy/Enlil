@@ -7,7 +7,6 @@ using Enlil.Domain;
 
 namespace Enlil
 {
-    
     public class ProjectHelper
     {
         private readonly BuildContext startContext;

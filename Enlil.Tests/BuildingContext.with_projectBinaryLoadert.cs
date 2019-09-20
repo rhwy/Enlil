@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ namespace Enlil.Tests
         {
 
             [Fact]
-            public async Task ensure_working_directoty_is_set()
+            public void ensure_working_directoty_is_set()
             {
-
+                
                 var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
 
                 Check.That(projectHelper.WorkingDirectory).IsEqualTo(SampleProjectHelper.WorkFolder());
@@ -52,7 +53,9 @@ namespace Enlil.Tests
                     .IsEqualTo(Path.Combine(SampleProjectHelper.WorkFolder(), $"{SampleProjectHelper.SampleProjectName}.csproj"));
                 Check.That(resultContext.ProjectName).IsEqualTo(SampleProjectHelper.SampleProjectName);
             }
+
         }
+        
     }
 
 
