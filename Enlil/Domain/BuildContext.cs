@@ -41,7 +41,8 @@ namespace Enlil.Domain
         public static IEnumerable<Type> operator <(BuildContext buildContext, TypeFilter filter)
             => filter(buildContext);
 
-
+        public static IEnumerable<MethodInfo> operator |(BuildContext buildContext, MethodFilter filter)
+            => filter(buildContext);
 
     }
 }

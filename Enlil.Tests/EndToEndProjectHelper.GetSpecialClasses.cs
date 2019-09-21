@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 using Enlil.Tests.SampleAndData;
@@ -37,7 +39,8 @@ namespace Enlil.Tests
                 var buildContext = projectHelper.BuildProjectAssembly();
                 var types = GetTypesByAttributeNameOnMethod(buildContext.ResultingAssembly,attributeName);
 
-                Check.That(types).IsNotNull(); 
+                Check.That(types).IsNotNull();
+                Check.That(types).InheritsFrom<IEnumerable<MethodInfo>>();
                 Check.That(types).HasSize(expectedTypesFound);
             }
 

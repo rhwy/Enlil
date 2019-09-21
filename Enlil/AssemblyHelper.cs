@@ -23,16 +23,17 @@ namespace Enlil
                 .GetExportedTypes()
                 .Where(t => t.CustomAttributes.Any(a => a.AttributeType.Name == name));
         }
-        public static IEnumerable<Type> GetTypesByAttributeNameOnMethod(Assembly asm, string name)
+        public static IEnumerable<MethodInfo> GetTypesByAttributeNameOnMethod(Assembly asm, string name)
         {
             name = name.EndsWith("Attribute") ? name : name + "Attribute";
 
             return asm
                 .GetExportedTypes()
+                .SelectMany(
+                    type => type.GetMethods())
                 .Where(
-                    type => type.GetMethods().Any(
-                        method => method.CustomAttributes.Any(
-                            attrib => attrib.AttributeType.Name == name))); 
+                    method => method.CustomAttributes.Any(
+                        attrib => attrib.AttributeType.Name == name)); 
         }
         
     }

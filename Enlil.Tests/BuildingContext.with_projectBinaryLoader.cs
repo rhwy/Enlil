@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Enlil.Tests.SampleAndData;
+using Enlil.Tests.TestTools;
 using NFluent;
 using Xunit;
 

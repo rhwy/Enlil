@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Enlil;
 using Enlil.Tests.SampleAndData;
+using Enlil.Tests.TestTools;
 using NFluent;
 using Xunit;
 

@@ -1,11 +1,9 @@
 using System;
-using Enlil;
 using Enlil.Domain;
 using NFluent;
 using NFluent.Extensibility;
-using Xunit;
 
-namespace Enlil.Tests
+namespace Enlil.Tests.TestTools
 {
     public static class ProjectHelperCheckExtensions
     {
