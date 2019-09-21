@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -45,13 +46,13 @@ namespace Enlil.Tests
             public void
                 use_static_helper_to_get_types_for_attribute_on_methods_and_exec()
             {
-                var types = buildContext | MethodTypesForAttribute("Experiment");
+                var found = buildContext | MethodTypesForAttribute("Experiment");
 
-                foreach (var type in types)
+                foreach (var element in found)
                 {
-//                    types
-//                        | Each
-//                        | Invoke("rui");
+                    var result = element.Method.Invoke(
+                        Activator.CreateInstance(element.Type, null), new[] {"Rui"});
+                    Check.That(result).IsEqualTo("<h1>Hello <strong>Rui</strong></h1>");
                 }
 
             }

@@ -21,5 +21,5 @@ namespace Enlil
     public delegate MethodFilter GetMethodFilterForAttributeName(string name);
     public delegate IEnumerable<Type> TypeFilter(BuildContext context);
 
-    public delegate IEnumerable<MethodInfo> MethodFilter(BuildContext context);
+    public delegate IEnumerable<MethodOnType> MethodFilter(BuildContext context);
 }
