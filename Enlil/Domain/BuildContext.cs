@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -19,17 +21,27 @@ namespace Enlil.Domain
         public long AssemblyLength { get; set; }
         public static BuildContext Default = new BuildContext();
         
-        public static BuildContext operator > (BuildContext startContext, string workingFolder)
+        public static BuildContext operator > (string workingFolder,BuildContext startContext)
         {
             var projectHelper = new ProjectHelper(workingFolder);
             var buildContext = projectHelper.BuildProjectAssembly();
             return  buildContext;
         }
-        public static BuildContext operator < (BuildContext startContext, string workingFolder)
+        public static BuildContext operator < (string workingFolder,BuildContext startContext)
         {
             var projectHelper = new ProjectHelper(workingFolder);
             var buildContext = projectHelper.BuildProjectAssembly();
             return buildContext;
         }
+        public static IEnumerable<Type> operator > (BuildContext buildContext, TypeFilter filter)
+        {
+            return filter(buildContext);
+        }
+
+        public static IEnumerable<Type> operator <(BuildContext buildContext, TypeFilter filter)
+            => filter(buildContext);
+
+
+
     }
 }

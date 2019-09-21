@@ -1,5 +1,8 @@
+using System.Reflection;
 using System.Threading.Tasks;
+using Enlil.Domain;
 using Enlil.Tests.SampleAndData;
+using NFluent;
 using Xunit;
 using static Enlil.EnlilHelper;
 
@@ -10,17 +13,20 @@ namespace Enlil.Tests
         public class MinimizeFrictionAndSyntax
         {
             private string workFolder = SampleProjectHelper.WorkFolder();
+            private BuildContext buildContext;
+            public MinimizeFrictionAndSyntax()
+            {
+                buildContext = workFolder > BuildAssemblyForPath;
+            }
+            
             [Fact]
-            public async Task
+            public void
                 use_static_helper()
             {
-                var buildContext = BUILD_ASSEMBLY 
-                                   > workFolder;
+                var types = buildContext > TypesForAttribute("Experiment");
 
-                //var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
-                //var buildContext = await projectHelper.BuildProjectAssembly();
-                //var types = GetTypesByAttributeName(buildContext.ResultingAssembly,attributeName);
-
+                Check.That(types).IsNotNull();
+                Check.That(types).HasSize(1);
             }
                 
         }
