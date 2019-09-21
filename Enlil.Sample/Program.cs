@@ -20,6 +20,10 @@ namespace Enlil.Sample
         {
             return new Markdown().Transform($"# Hello **{name}**");
         }
+
+        [Experiment(Name = "two")]
+        public string SayOla(string name) => $"Olà {name}";
+
     }
     
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]

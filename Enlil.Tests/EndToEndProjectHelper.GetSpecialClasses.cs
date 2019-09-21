@@ -30,7 +30,7 @@ namespace Enlil.Tests
             
 
             [Theory]
-            [InlineData("Experiment",1)]
+            [InlineData("Experiment",2)]
             [InlineData("I_NOT_EXIST",0)]
             public void
                 looking_for_an_attibute_on_a_method(string attributeName, int expectedTypesFound)
@@ -40,7 +40,7 @@ namespace Enlil.Tests
                 var types = GetTypesByAttributeNameOnMethod(buildContext.ResultingAssembly,attributeName);
 
                 Check.That(types).IsNotNull();
-                Check.That(types).InheritsFrom<IEnumerable<MethodInfo>>();
+                Check.That(types).InheritsFrom<IEnumerable<MethodOnType>>();
                 Check.That(types).HasSize(expectedTypesFound);
             }
 

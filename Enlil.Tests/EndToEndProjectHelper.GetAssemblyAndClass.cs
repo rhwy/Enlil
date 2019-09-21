@@ -26,9 +26,9 @@ namespace Enlil.Tests
                 var asm = resultContext.ResultingAssembly;
                 var type = asm.GetType("Enlil.Sample.Greetings");
                 var greetings = Activator.CreateInstance(type);
-                var sayHello = type.GetMethod("SayHello");
-                var result = sayHello?.Invoke(greetings, new object[] {"Rui"});
-                Check.That(result).IsEqualTo($"Hello Rui");
+                var sayHello = type.GetMethod("SayHello",new Type[]{});
+                var result = sayHello?.Invoke(greetings, new object[] {});
+                Check.That(result).IsEqualTo($"Hello World");
             }
 
             [Fact]
@@ -40,7 +40,7 @@ namespace Enlil.Tests
                 var asm = resultContext.ResultingAssembly;
                 var type = asm.GetType("Enlil.Sample.Greetings");
                 var greetings = Activator.CreateInstance(type);
-                var sayHello = type.GetMethod("SayHelloMdToHtml");
+                var sayHello = type.GetMethod("SayHello",new Type[]{typeof(string)});
                 var result = sayHello?.Invoke(greetings, new object[] {"Rui"});
                 Check.That(result).IsEqualTo($"<h1>Hello <strong>Rui</strong></h1>");
             }

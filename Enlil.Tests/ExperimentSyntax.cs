@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Enlil.Tests
                 var types = buildContext > TypesForAttribute("Experiment");
 
                 Check.That(types).IsNotNull();
-                Check.That(types).HasSize(1);
+                Check.That(types.Element).HasSize(1);
             }
             
             [Fact]
@@ -38,7 +39,7 @@ namespace Enlil.Tests
                 var types = buildContext | MethodTypesForAttribute("Experiment");
 
                 Check.That(types).IsNotNull();
-                Check.That(types).HasSize(1);
+                Check.That(types.Element).HasSize(2);
                 
             }
             
@@ -48,15 +49,43 @@ namespace Enlil.Tests
             {
                 var found = buildContext | MethodTypesForAttribute("Experiment");
 
-                foreach (var element in found)
-                {
-                    var result = element.Method.Invoke(
-                        Activator.CreateInstance(element.Type, null), new[] {"Rui"});
-                    Check.That(result).IsEqualTo("<h1>Hello <strong>Rui</strong></h1>");
-                }
-
+                var action = 
+                    found
+                     | Each<MethodOnType>( e =>
+                        {
+                        string result = (string)e.Method.Invoke(
+                            Activator.CreateInstance(e.Type, null), new object[] {"Rui"});
+                        
+                        Check.That(result).Contains("Rui");
+                        });
             }
-                
+            [Fact]
+            public void
+                use_static_helper_to_get_types_for_attribute_on_methods_and_exec_classic()
+            {
+                var found = buildContext | MethodTypesForAttribute("Experiment");
+
+                found.Each(
+                    e =>
+                    {
+                        
+                        var result = e.InvokeMethod<string>(args: new object[] {"Rui"});
+                        
+                        if (e.HasMethodAttributeArgument("Name", "one"))
+                        {
+                            Check.That(result).IsEqualTo("<h1>Hello <strong>Rui</strong></h1>");
+                        } else if (e.HasMethodAttributeArgument(name: "Name", "two"))
+                        {
+                            Check.That(result).IsEqualTo("Olà Rui");
+                        }
+                        else
+                        {
+                            throw new Exception("we are supposed to have only these 2 test cases");
+                        }
+                        
+                    });
+            }
         }
+        
     }
 }

@@ -33,15 +33,15 @@ namespace Enlil.Domain
             var buildContext = projectHelper.BuildProjectAssembly();
             return buildContext;
         }
-        public static IEnumerable<Type> operator > (BuildContext buildContext, TypeFilter filter)
+        public static ReflectionAction<IEnumerable<Type>,Type> operator > (BuildContext buildContext, TypeFilter filter)
         {
             return filter(buildContext);
         }
 
-        public static IEnumerable<Type> operator <(BuildContext buildContext, TypeFilter filter)
+        public static ReflectionAction<IEnumerable<Type>,Type> operator <(BuildContext buildContext, TypeFilter filter)
             => filter(buildContext);
 
-        public static IEnumerable<MethodOnType> operator |(BuildContext buildContext, MethodFilter filter)
+        public static ReflectionAction<IEnumerable<MethodOnType>,MethodOnType> operator |(BuildContext buildContext, MethodFilter filter)
             => filter(buildContext);
 
     }
