@@ -35,7 +35,12 @@ namespace Enlil
                     element => element.Method.CustomAttributes.Any(
                         attrib => attrib.AttributeType.Name == name)); 
         }
-        
+
+        public static IEnumerable<Type> GetTypesImplementingInterface(Assembly asm, string name)
+        {
+            return asm.GetExportedTypes().Where(
+                type => type.GetInterfaces().Any(i => i.Name == name));
+        }
     }
 
     public struct MethodOnType

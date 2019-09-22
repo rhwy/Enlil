@@ -12,7 +12,7 @@ namespace Enlil.Sample
     }
 
     [Experiment]
-    public class Greetings
+    public class Greetings : IGreetings
     {
         public string SayHello() => "Hello World";
         [Experiment(Name = "one")]
@@ -23,9 +23,14 @@ namespace Enlil.Sample
 
         [Experiment(Name = "two")]
         public string SayOla(string name) => $"Olà {name}";
-
     }
-    
+
+    public interface IGreetings
+    {
+        string SayHello();
+    }
+
+
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
     public class ExperimentAttribute : Attribute
     {

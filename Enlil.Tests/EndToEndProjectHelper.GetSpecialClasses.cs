@@ -44,7 +44,21 @@ namespace Enlil.Tests
                 Check.That(types).HasSize(expectedTypesFound);
             }
 
-           
+            [Theory]
+            [InlineData("IGreetings",1)]
+            [InlineData("I_NOT_EXIST",0)]
+            public void
+                looking_for_a_class_implementing_interface(string interfaceName, int expectedTypesFound)
+            {
+                var projectHelper = new ProjectHelper(SampleProjectHelper.WorkFolder());
+                var buildContext = projectHelper.BuildProjectAssembly();
+                var types = GetTypesImplementingInterface(buildContext.ResultingAssembly,interfaceName);
+
+                Check.That(types).IsNotNull();
+                Check.That(types).InheritsFrom<IEnumerable<Type>>();
+                Check.That(types).HasSize(expectedTypesFound);
+            }
+
         }
     }
 }
